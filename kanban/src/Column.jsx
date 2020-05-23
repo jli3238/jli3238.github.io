@@ -6,7 +6,7 @@ export default function Column({column, columnIndex, onMoveLeft, onMoveRight}) {
   return (
     <div className="column">
       <div className="columnTitle">{column.name}</div>
-      {column.cards.length > 0 && column.cards.map((card, cardIndex) =>
+      {column && column.cards && column.cards.length > 0 && column.cards.map((card, cardIndex) =>
       <Card 
         key={card.name} 
         card={card}

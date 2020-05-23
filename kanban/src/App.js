@@ -14,15 +14,14 @@ export default function App() {
   const DIRECTION_MOVE_RIGHT = 1;
 
   function handleMove (columnIdx, cardIdx, direction) {
-    const cardMoved = columns[columnIdx].cards.find(index => index === cardIdx)[0];
-    const columnMovedFrom = columns[columnIdx];
-    const columnMovedTo = columns[columnIdx + direction];
+    const cardMoved = columns[columnIdx].cards[cardIdx];
     const newCardsInColumnMovedFrom = columns[columnIdx].cards.filter(card => card.name !== cardMoved.name);
-    const newCardsInColumnMovedTo = [...columns[columnIdx + direction].cards, cardMoved]; 
-    setColumns(...columns, 
-      {...columnMovedFrom, cards: newCardsInColumnMovedFrom},
-      {...columnMovedTo, cards: newCardsInColumnMovedTo},
-    );
+    const newColumnMovedFrom = {...columns[columnIdx], cards: newCardsInColumnMovedFrom};
+    const newCardsInColumnMovedTo = [...columns[columnIdx + direction].cards, cardMoved];
+    const newColumnMovedTo= {...columns[columnIdx + direction], cards: newCardsInColumnMovedTo};
+    const newColumns = columns.map((column, columnIndex) =>
+      columnIndex === columnIdx ? newColumnMovedFrom : columnIndex === columnIdx + direction ? newColumnMovedTo : column);
+    setColumns(newColumns);
   }
 
   return (
