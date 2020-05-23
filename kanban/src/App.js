@@ -8,7 +8,6 @@ export default function App() {
     {name: 'Inprogress', cards: [{name:'Card B'}]},
     {name: 'Done', cards: [{name:'Card C'}]}
   ]);
-  // eslint-disable-next-line
   const [newCardNames, setNewCardNames] = useState(['','','']);
 
   const DIRECTION_MOVE_LEFT = -1;
@@ -44,6 +43,15 @@ export default function App() {
     setNewCardNames(newCardNames.map((newCardName, newCardNameIndex) => newCardNameIndex === columnIdx ? e.target.value : ''));
   }
 
+  function handleDelete(columnIdx, cardIdx) {
+    const cardDeleted = columns[columnIdx].cards[cardIdx];
+    const updatedCardsInColumnWithDeleted = columns[columnIdx].cards.filter(card => card.name !== cardDeleted.name);
+    const updatedColumnWithDeleted = {...columns[columnIdx], cards: updatedCardsInColumnWithDeleted};
+    const updatedColumns = columns.map((column, columnIndex) =>
+      columnIndex === columnIdx ? updatedColumnWithDeleted : column);
+    setColumns(updatedColumns);
+  }
+
   return (
     <div className="App">
       {columns.length > 0 && columns.map((column, columnIndex) =>
@@ -54,6 +62,7 @@ export default function App() {
         newCardNames={newCardNames}
         onNewCardNamesChange={(e) => handleNewCardNamesChange(columnIndex, e)}
         onAddCard={() => handleAddCard(columnIndex)}
+        onDelete={cardIndex => handleDelete(columnIndex, cardIndex)}
         onMoveLeft={cardIndex => handleMove(columnIndex, cardIndex, DIRECTION_MOVE_LEFT)}
         onMoveRight={cardIndex => handleMove(columnIndex, cardIndex, DIRECTION_MOVE_RIGHT)}/>)}
     </div>

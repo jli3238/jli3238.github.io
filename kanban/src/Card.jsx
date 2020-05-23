@@ -6,11 +6,12 @@ export default function Card({
   first, 
   last,
   onMoveLeft,
+  onDelete,
   onMoveRight}) {
   return (
     <div className="card">
       {!first && <button onClick={onMoveLeft}>{"<"}</button>}
-      <span>{card.name}</span>
+      <span>{card.name}<button onClick={onDelete}>{"-"}</button></span>
       {!last && <button onClick={onMoveRight}>{">"}</button>}
     </div>
   );

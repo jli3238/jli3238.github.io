@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './Card';
 import './App.css';
 
-export default function Column({column, columnIndex, onMoveLeft, onMoveRight, onAddCard, newCardNames, onNewCardNamesChange}) {
+export default function Column({column, columnIndex, onMoveLeft, onDelete, onMoveRight, onAddCard, newCardNames, onNewCardNamesChange}) {
   return (
     <div className="column">
       <div className="columnTitle">{column.name}</div>
@@ -14,11 +14,12 @@ export default function Column({column, columnIndex, onMoveLeft, onMoveRight, on
         first={columnIndex === 0}
         last={columnIndex === 2}
         onMoveLeft={() => onMoveLeft(cardIndex)}
+        onDelete={() => onDelete(cardIndex)}
         onMoveRight={() => onMoveRight(cardIndex)} />)}
       <input 
         type="text" 
         value={newCardNames[columnIndex]} 
-        onChange={(e) => onNewCardNamesChange(e)} 
+        onChange={e => onNewCardNamesChange(e)} 
         placeholder="Type new card name..." />
         <button onClick={() => onAddCard()}>{"+"}</button>
     </div>
