@@ -8,12 +8,13 @@ export default function App() {
     {name: 'Inprogress', cards: [{name:'Card B'}]},
     {name: 'Done', cards: [{name:'Card C'}]}
   ]);
-  const [newCardName, setNewCardName] = useState('');
+  // eslint-disable-next-line
+  const [newCardNames, setNewCardNames] = useState(['','','']);
 
   const DIRECTION_MOVE_LEFT = -1;
   const DIRECTION_MOVE_RIGHT = 1;
 
-  function handleMove (columnIdx, cardIdx, direction) {
+  function handleMove(columnIdx, cardIdx, direction) {
     const cardMoved = columns[columnIdx].cards[cardIdx];
     const updatedCardsInColumnMovedFrom = columns[columnIdx].cards.filter(card => card.name !== cardMoved.name);
     const updatedCardsInColumnMovedTo = [...columns[columnIdx + direction].cards, cardMoved];
@@ -28,11 +29,19 @@ export default function App() {
     setColumns(updatedColumns);
   }
 
-  function handleAddCard (columnIdx) {
-    if (newCardName.trim() === '') return;
-    const newCards = [...columns[columnIdx].cards, {name: newCardName}];
+  function handleAddCard(columnIdx) {
+    const newCardName = newCardNames[columnIdx].trim();
+    const existingCardNames = columns.map(column => column.cards.map(card => card.name)).flat(1);
+    if (newCardName === '' || existingCardNames.includes(newCardName)) return;
+    const newCards = [...columns[columnIdx].cards, {name: newCardNames[columnIdx]}];
     const columnWithNewCardAdded = {...columns[columnIdx], cards: newCards};
-    setColumns([...columns, columnWithNewCardAdded]);
+    const columnsWithNewCardAdded = columns.map((column, columnIndex) => columnIndex === columnIdx ? columnWithNewCardAdded : column);
+    setColumns(columnsWithNewCardAdded);
+    setNewCardNames(['','','']);
+  }
+
+  function handleNewCardNamesChange(columnIdx, e) {
+    setNewCardNames(newCardNames.map((newCardName, newCardNameIndex) => newCardNameIndex === columnIdx ? e.target.value : ''));
   }
 
   return (
@@ -42,7 +51,8 @@ export default function App() {
         key={column.name} 
         column={column}
         columnIndex={columnIndex}
-        newCardName={newCardName}
+        newCardNames={newCardNames}
+        onNewCardNamesChange={(e) => handleNewCardNamesChange(columnIndex, e)}
         onAddCard={() => handleAddCard(columnIndex)}
         onMoveLeft={cardIndex => handleMove(columnIndex, cardIndex, DIRECTION_MOVE_LEFT)}
         onMoveRight={cardIndex => handleMove(columnIndex, cardIndex, DIRECTION_MOVE_RIGHT)}/>)}
