@@ -14,22 +14,63 @@ code {
 }
 
 .column {
-  border: solid 2px purple;
+  border: solid 1px gray;
   flex-grow: 1;
   margin: 25px;
+  position: relative;
 }
 
 .columnTitle {
-  font-size: 20px;
+  font-size: 28px;
   font-weight: 900;
-  border: solid 1px purple;
+}
+
+.cards {
+  padding-bottom: 50px;
 }
 
 .card {
-  padding: 25px;
   display: flex;
+  background-color: lightgray;
+  margin: 25px;
 }
 
 .card span {
   flex-grow: 1;
+}
+
+.card span button {
+  margin-left: 5px;
+}
+
+div.add-card {
+  position: absolute;
+  bottom: 0px;
+  margin-left: 25px;
+}
+
+div.add-card input {
+  margin-right: 5px;
+}
+
+.title {
+  border: solid 1px gray;
+  margin: 25px;
+  position: relative;
+}
+
+.section-title {
+  font-size: 20px !important;
+  font-weight: bold;
+}
+
+.section-body {
+  border: solid 1px gray !important;
+  margin-left: 5px;
+  margin-bottom: 25px;
+}
+
+.algorithm-result {
+  background-color: lightgray;
+  font-weight: bold
 }

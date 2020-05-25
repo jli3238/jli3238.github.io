@@ -1,14 +1,4 @@
-.App {
+.app-kanban {
   text-align: center;
   display: flex;
 };
-
-.column {
-  border: solid 1px purple;
-  flex-grow: 1;
-  margin: 25px;
-}
-
-.card {
-  padding: 25px;
-}
