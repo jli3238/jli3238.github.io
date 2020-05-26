@@ -21,10 +21,10 @@ export default function Column({column, columnIndex, onMoveLeft, onDelete, onMov
       </div>
       <div className="add-card">
         <input 
-        type="text" 
-        value={newCardNames[columnIndex]} 
-        onChange={e => onNewCardNamesChange(e)} 
-        placeholder="Type new card name..." />
+          type="text" 
+          value={newCardNames[columnIndex]} 
+          onChange={e => onNewCardNamesChange(e)} 
+          placeholder="Type new card name..." />
         <button onClick={() => onAddCard()}>{"+"}</button>
       </div>
     </div>

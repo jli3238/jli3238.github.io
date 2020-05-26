@@ -17,6 +17,14 @@ export default function App() {
   const [x, setX] = useState(1);
   const [y, setY] = useState(1);
 
+  const [sentenceForPalindromeCheck, setSentenceForPalindromeCheck] = useState('');
+
+  const [counter, setCounter] = useState(0);
+
+  const [hexadecimalNumber, setHexadecimalNumber] = useState(0);
+
+  const [randomColor, setRandomColor] = useState("");
+
   function handleMove(columnIdx, cardIdx, direction) {
     const cardMoved = columns[columnIdx].cards[cardIdx];
     const updatedCardsInColumnMovedFrom = columns[columnIdx].cards.filter(card => card.name !== cardMoved.name);
@@ -56,6 +64,25 @@ export default function App() {
     setColumns(updatedColumns);
   }
 
+  function handleCounterButtonClick() {
+    setCounter(counter + 1);
+  }
+
+  function handleCounterResetButtonClick() {
+    setCounter(0);
+  }
+
+  function handleDecimalNumberChange(e) {
+    const { value } = e.currentTarget;
+    setHexadecimalNumber(parseInt(value,10).toString(16));
+  }
+
+  function handlePickRandomColorButtonClick() {
+    const num = (val) => Math.floor(Math.random()*(val + 1));
+    const clr = `rgb(${num(255)},${num(255)},${num(255)});`;
+    setRandomColor(clr);
+  }
+
   function handleHeapSizeChange(e) {
     const userInput = e.currentTarget.value;
     setHeapSize(userInput > 0 ? userInput : 1);
@@ -86,24 +113,32 @@ export default function App() {
   };
 
   function maxNumberOfGates(arr, dept) {
-    // Create a frequency map for the day
-    let freqMap = new Map();
-    for (let n = 0; n < arr.length; n++) {
-        const a = arr[n];
-        const d = dept[n];
-        for (let i = a; i < d; i++) {
-            let count = freqMap.has(i) ? freqMap.get(i) : 0;
-            freqMap.set(i, count + 1);
-        }
-    }
-    // Calculate the max value
-    let maxVal = 0;
-    for (let n in freqMap.values()) {
-      if (n > maxVal) {
-          maxVal = n;
+    let maxNumber = 0, curNumber = 0, i = 0, j = 0;
+    const sortedArr = arr.sort((a,b) => a-b);
+    const sortedDept = dept.sort((a,b) => a-b);
+    while(i < arr.length && j < dept.length){
+      while (sortedArr[i] < sortedDept[j]) {
+        curNumber++;
+        maxNumber = Math.max(maxNumber, curNumber);
+        i++;
       }
+      curNumber--;
+      j++;
     }
-    return maxVal;
+    return maxNumber;
+  }
+
+  function handleSentenceChange(e) {
+    return setSentenceForPalindromeCheck(e.currentTarget.value);
+  }
+
+  function isPalindrome() {
+    const sentenceWithCharacterOnly = sentenceForPalindromeCheck.replace(/[^\w]|_/g, "").toLowerCase();
+    let isPalindrome = true;
+    for (let i = 0; i <= sentenceWithCharacterOnly.length / 2; i++) {
+      isPalindrome = isPalindrome && sentenceWithCharacterOnly.slice(i,i+1) === sentenceWithCharacterOnly.slice(sentenceWithCharacterOnly.length-i-1,sentenceWithCharacterOnly.length-i);
+    }
+    return isPalindrome.toString();
   }
 
   return (
@@ -122,6 +157,38 @@ export default function App() {
               onDelete={cardIndex => handleDelete(columnIndex, cardIndex)}
               onMoveLeft={cardIndex => handleMove(columnIndex, cardIndex, DIRECTION_MOVE_LEFT)}
               onMoveRight={cardIndex => handleMove(columnIndex, cardIndex, DIRECTION_MOVE_RIGHT)}/>)}
+        </div>
+      </div>
+      <div>
+        <div className="section-title">Counter by Click</div> 
+        <div className="section-body">
+          <p>{`Add one by click the button.`}</p>
+          <div>
+            <button onClick={handleCounterButtonClick}>Click to add 1</button>
+            <button onClick={handleCounterResetButtonClick}>Reset the counter</button>
+          </div>
+          <span><label>{`The current value is: `}</label><span className="algorithm-result">{counter}</span></span>
+        </div>
+      </div>
+      <div>
+        <div className="section-title">Convert a Decimal Number to Hexadecimal Number</div> 
+        <div className="section-body">
+          <p>{`Convert a decimal number to hexadecimal number.`}</p>
+          <div>
+            <label>Enter a decimal number to convert: </label>
+            <input type="number" onChange={handleDecimalNumberChange}/>
+          </div>
+          <span><label>{`The hexadecimal of it is: `}</label><span className="algorithm-result">{hexadecimalNumber}</span></span>
+        </div>
+      </div>
+      <div>
+        <div className="section-title">Pick a Random Color</div> 
+        <div className="section-body">
+          <p>{`Pick a random color by click the button.`}</p>
+          <div>
+            <button onClick={handlePickRandomColorButtonClick}>Pick a random color</button>
+          </div>
+          <span><label>{`The current color is: `}</label><span className="algorithm-result">{randomColor}</span></span>
         </div>
       </div>
       <div>
@@ -164,9 +231,20 @@ export default function App() {
           <p>{`dep = [11:45, 11:30, 16:45]`}</p>
           <p>{`Arr array is sorted by time. And departure array is sorted by corresponding arrival times. Plane 'i' arrives at time arr[i] and departs at time dep[i]`}</p>
           <p>{`Note: After some questions, it was decided that minute was the smallest unit of time we cared about. Gate was considered occupied on the arriving minute, but empty on the departing minute. And that the arrival and departure times could be represented as such as integers. e.g. Day runs from minute 0 to minute 1339 (since using a zero-based index). So our example times represented as:`}</p>
-          <p>{`arr = [570, 675, 990]`}</p>
-          <p>{`dept = [705, 690, 1005]`}</p>
-          <span><label>{`Max number of gates: `}</label><span className="algorithm-result">{maxNumberOfGates([570, 675, 990],[705, 690, 1005])}</span></span>
+          <p>{`arr = [570, 675, 990, 435, 255]`}</p>
+          <p>{`dept = [705, 690, 785, 1005, 685]`}</p>
+          <span><label>{`Max number of gates: `}</label><span className="algorithm-result">{maxNumberOfGates([570, 675, 990, 435, 255],[705, 690, 785, 1005, 685])}</span></span>
+        </div>
+      </div>
+      <div>
+        <div className="section-title">Algorithm: Palindrome</div> 
+        <div className="section-body">
+          <p>{`A palindrome is a word, phrase, number or sequence of words that reads the same backward as forward. Punctuation and spaces between the words or lettering is allowed.`}</p>
+          <div>
+            <label>{"Enter a sentence here: "}</label>
+            <input type="text" value={sentenceForPalindromeCheck} onChange={e=>handleSentenceChange(e)}/>
+          </div>
+          <span><label>{`Is it Palindrome: `}</label><span className="algorithm-result">{isPalindrome(sentenceForPalindromeCheck)}</span></span>
         </div>
       </div>
     </div>
