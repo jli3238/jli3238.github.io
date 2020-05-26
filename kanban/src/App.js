@@ -116,11 +116,11 @@ export default function App() {
         charOccurrencesPairs[char] = 1;
       }
     }
-    let maxOccurrences = 0;
     let charsWithMaxOccurrences = [];
+    let maxOccurrences = 0;
     for(let pair in charOccurrencesPairs) {
       if (charOccurrencesPairs[pair] >= maxOccurrences) {
-        charsWithMaxOccurrences = charOccurrencesPairs[pair] === maxOccurrences ? [...charsWithMaxOccurrences, pair] :[pair];
+        charsWithMaxOccurrences = charOccurrencesPairs[pair] === maxOccurrences ? [...charsWithMaxOccurrences, pair] : [pair];
         maxOccurrences = charOccurrencesPairs[pair];
       }
     }
@@ -180,7 +180,7 @@ export default function App() {
     const sentenceWithCharacterOnly = sentenceForPalindromeCheck.replace(/[^\w]|_/g, "").toLowerCase();
     let isPalindrome = true;
     for (let i = 0; i <= sentenceWithCharacterOnly.length / 2; i++) {
-      isPalindrome = isPalindrome && sentenceWithCharacterOnly.slice(i,i+1) === sentenceWithCharacterOnly.slice(sentenceWithCharacterOnly.length-i-1,sentenceWithCharacterOnly.length-i);
+      isPalindrome = isPalindrome && sentenceWithCharacterOnly.charAt(i) === sentenceWithCharacterOnly.charAt(sentenceWithCharacterOnly.length-i-1);
     }
     return isPalindrome.toString();
   }
