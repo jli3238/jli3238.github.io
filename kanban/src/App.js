@@ -117,14 +117,14 @@ export default function App() {
       }
     }
     let maxOccurrences = 0;
-    let charWithMaxOccurrences = [];
+    let charsWithMaxOccurrences = [];
     for(let pair in charOccurrencesPairs) {
       if (charOccurrencesPairs[pair] >= maxOccurrences) {
-        charWithMaxOccurrences = charOccurrencesPairs[pair] === maxOccurrences ? [...charWithMaxOccurrences, pair] :[pair];
+        charsWithMaxOccurrences = charOccurrencesPairs[pair] === maxOccurrences ? [...charsWithMaxOccurrences, pair] :[pair];
         maxOccurrences = charOccurrencesPairs[pair];
       }
     }
-    return `${charWithMaxOccurrences.join()}; Occurrences: ${maxOccurrences}.`
+    return [charsWithMaxOccurrences, maxOccurrences];
   }
 
   function handleHeapSizeChange(e) {
@@ -254,7 +254,13 @@ export default function App() {
             <label>Enter a string: </label>
             <input type="text" value={sentenceForMostOftenCharCheck} onChange={e=>handleSentenceForMostOftenCharChange(e)}/>
           </div>
-          <span><label>{`The character that appears most often is : `}</label><span className="algorithm-result">{getMostOftenChar()}</span></span>
+          <span>
+            <label>{`The character${getMostOftenChar()[0].length > 1 ? 's' : ''} that appear${getMostOftenChar()[0].length > 1 ? '' : 's'} most often ${getMostOftenChar()[0].length > 1 ? 'are' : 'is'}: `}</label>
+            <span className="algorithm-result">{getMostOftenChar()[0].join(',')}</span>
+            <span>{`, with occurrences: `}</span>
+            <span className="algorithm-result">{`${getMostOftenChar()[1]}`}</span>
+            <span>{`.`}</span>
+          </span>
         </div>
       </div>
       <div>
