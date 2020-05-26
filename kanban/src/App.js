@@ -21,9 +21,13 @@ export default function App() {
 
   const [counter, setCounter] = useState(0);
 
-  const [hexadecimalNumber, setHexadecimalNumber] = useState(0);
+  const [decimalNumber, setDecimalNumber] = useState(0);
 
   const [randomColor, setRandomColor] = useState("");
+
+  const [number, setNumber] = useState(1);
+
+  const [sentenceForMostOftenCharCheck, setSentenceForMostOftenCharCheck] = useState('');
 
   function handleMove(columnIdx, cardIdx, direction) {
     const cardMoved = columns[columnIdx].cards[cardIdx];
@@ -73,14 +77,54 @@ export default function App() {
   }
 
   function handleDecimalNumberChange(e) {
-    const { value } = e.currentTarget;
-    setHexadecimalNumber(parseInt(value,10).toString(16));
+    const value = e.currentTarget.value > 0 ? e.currentTarget.value : 0;
+    setDecimalNumber(value);
   }
+
+  const getHexadecimalNumber = () => parseInt(decimalNumber, 10).toString(16);
 
   function handlePickRandomColorButtonClick() {
     const num = (val) => Math.floor(Math.random()*(val + 1));
     const clr = `rgb(${num(255)},${num(255)},${num(255)});`;
     setRandomColor(clr);
+  }
+
+  function handleNumberChange(e) {
+    const num = e.currentTarget.value;
+    setNumber(num > 1 ? num : 1);    
+  }
+
+  function isPrimeNumber() {
+    if (number < 2) return "is";
+    for (let i=2; i<=Math.sqrt(number); i++) {
+      if (number % i === 0) return "is not";
+    }
+    return "is";
+  }
+
+  function handleSentenceForMostOftenCharChange(e) {
+    setSentenceForMostOftenCharCheck(e.currentTarget.value);
+  }
+
+  function getMostOftenChar() {
+    let charOccurrencesPairs = {};
+    for (let i=0; i<sentenceForMostOftenCharCheck.length; i++) {
+      let char = sentenceForMostOftenCharCheck.charAt(i);
+      if (charOccurrencesPairs[char]) {
+        charOccurrencesPairs[char]++;
+      } else {
+        charOccurrencesPairs[char] = 1;
+      }
+    }
+    let maxOccurrences = 0;
+    let charWithMaxOccurrences = [];
+    for(let pair in charOccurrencesPairs) {
+      if (charOccurrencesPairs[pair] >= maxOccurrences) {
+        charWithMaxOccurrences = charOccurrencesPairs[pair] === maxOccurrences ? [...charWithMaxOccurrences, pair] :[pair];
+        maxOccurrences = charOccurrencesPairs[pair];
+      }
+    }
+    return `${charWithMaxOccurrences.join()}; Occurrences: ${maxOccurrences}.`
   }
 
   function handleHeapSizeChange(e) {
@@ -128,8 +172,8 @@ export default function App() {
     return maxNumber;
   }
 
-  function handleSentenceChange(e) {
-    return setSentenceForPalindromeCheck(e.currentTarget.value);
+  function handlePalindromeSentenceChange(e) {
+    setSentenceForPalindromeCheck(e.currentTarget.value);
   }
 
   function isPalindrome() {
@@ -176,9 +220,9 @@ export default function App() {
           <p>{`Convert a decimal number to hexadecimal number.`}</p>
           <div>
             <label>Enter a decimal number to convert: </label>
-            <input type="number" onChange={handleDecimalNumberChange}/>
+            <input type="number" value={decimalNumber} onChange={e=>handleDecimalNumberChange(e)}/>
           </div>
-          <span><label>{`The hexadecimal of it is: `}</label><span className="algorithm-result">{hexadecimalNumber}</span></span>
+          <span><label>{`The hexadecimal of it is: `}</label><span className="algorithm-result">{getHexadecimalNumber()}</span></span>
         </div>
       </div>
       <div>
@@ -186,9 +230,31 @@ export default function App() {
         <div className="section-body">
           <p>{`Pick a random color by click the button.`}</p>
           <div>
-            <button onClick={handlePickRandomColorButtonClick}>Pick a random color</button>
+            <button onClick={e=>handlePickRandomColorButtonClick(e)}>Pick a random color</button>
           </div>
           <span><label>{`The current color is: `}</label><span className="algorithm-result">{randomColor}</span></span>
+        </div>
+      </div>
+      <div>
+        <div className="section-title">Prime Number</div> 
+        <div className="section-body">
+          <p>{`Check  if a number is a prime number.`}</p>
+          <div>
+            <label>Enter a number: </label>
+            <input type="number" value={number} onChange={e=>handleNumberChange(e)}/>
+          </div>
+          <span><label>{`This number `}<span className="algorithm-result">{isPrimeNumber()}</span>{` a prime number.`}</label></span>
+        </div>
+      </div>
+      <div>
+        <div className="section-title">Find the Character that Appears Most Often in a String</div> 
+        <div className="section-body">
+          <p>{`Find the character that appears most often in a string.`}</p>
+          <div>
+            <label>Enter a string: </label>
+            <input type="text" value={sentenceForMostOftenCharCheck} onChange={e=>handleSentenceForMostOftenCharChange(e)}/>
+          </div>
+          <span><label>{`The character that appears most often is : `}</label><span className="algorithm-result">{getMostOftenChar()}</span></span>
         </div>
       </div>
       <div>
@@ -242,7 +308,7 @@ export default function App() {
           <p>{`A palindrome is a word, phrase, number or sequence of words that reads the same backward as forward. Punctuation and spaces between the words or lettering is allowed.`}</p>
           <div>
             <label>{"Enter a sentence here: "}</label>
-            <input type="text" value={sentenceForPalindromeCheck} onChange={e=>handleSentenceChange(e)}/>
+            <input type="text" value={sentenceForPalindromeCheck} onChange={e=>handlePalindromeSentenceChange(e)}/>
           </div>
           <span><label>{`Is it Palindrome: `}</label><span className="algorithm-result">{isPalindrome(sentenceForPalindromeCheck)}</span></span>
         </div>
