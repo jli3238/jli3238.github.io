@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Column from './Column';
 import './App.css';
 
@@ -17,6 +17,10 @@ export default function App() {
   const [x, setX] = useState(1);
   const [y, setY] = useState(1);
 
+  const arrInput = useRef(null);
+  const deptInput = useRef(null);
+  const [maxNumberOfGates, setMaxNumberOfGates] = useState(0);
+
   const [sentenceForPalindromeCheck, setSentenceForPalindromeCheck] = useState('');
 
   const [counter, setCounter] = useState(0);
@@ -28,6 +32,8 @@ export default function App() {
   const [number, setNumber] = useState(1);
 
   const [sentenceForMostOftenCharCheck, setSentenceForMostOftenCharCheck] = useState('');
+
+  const [bracketString, setBracketString] = useState('');
 
   function handleMove(columnIdx, cardIdx, direction) {
     const cardMoved = columns[columnIdx].cards[cardIdx];
@@ -127,6 +133,20 @@ export default function App() {
     return [charsWithMaxOccurrences, maxOccurrences];
   }
 
+    for (let i = 0; i < bracketString.length; i++) {
+      const bracket = bracketString.charAt(i);
+      if (bracket === '}' && matchingArr[matchingArr.length -1] === '{' ||
+          bracket === ']' && matchingArr[matchingArr.length -1] === '[' ||
+          bracket === ')' && matchingArr[matchingArr.length -1] === '(') {
+          matchingArr = matchingArr.slice(0, matchingArr.length - 1);
+      }else{
+        if (['}', ']', ')'].includes(bracket)) return 'not ';
+        matchingArr = [...matchingArr, bracket];
+      }
+    }
+    return matchingArr.length === 0 ? '' : 'not ';
+  }
+
   function handleHeapSizeChange(e) {
     const userInput = e.currentTarget.value;
     setHeapSize(userInput > 0 ? userInput : 1);
@@ -156,7 +176,11 @@ export default function App() {
     return diff;
   };
 
-  function maxNumberOfGates(arr, dept) {
+  function calculateMaxNumberOfGates() {
+    const arr = arrInput.current.value.split(', ').map(i=>
+      i.split(':').map(j=>parseInt(j, 10)).reduce((total, min) => total * 60 + min)); //[570, 675, 990, 435, 255];
+    const dept = deptInput.current.value.split(', ').map(i=>
+      i.split(':').map(j=>parseInt(j, 10)).reduce((total, min) => total * 60 + min)); //[705, 690, 785, 1005, 685];
     let maxNumber = 0, curNumber = 0, i = 0, j = 0;
     const sortedArr = arr.sort((a,b) => a-b);
     const sortedDept = dept.sort((a,b) => a-b);
@@ -169,7 +193,7 @@ export default function App() {
       curNumber--;
       j++;
     }
-    return maxNumber;
+    setMaxNumberOfGates(maxNumber);
   }
 
   function handlePalindromeSentenceChange(e) {
@@ -264,6 +288,20 @@ export default function App() {
         </div>
       </div>
       <div>
+        <div className="section-title">Check if brackets are matched in a brackets-only string</div> 
+        <div className="section-body">
+          <p>{`Check if all brackets are matched in a bracket-only string.`}</p>
+          <div>
+            <label>Enter a bracket-only string: </label>
+            <input type="text" value={bracketString} onChange={e=>handleBracketStringChange(e)}/>
+          </div>
+          <span>
+            <label>{`The brackets are: `}</label>
+            <span className="algorithm-result">{`${areBracketsMatched()}matched.`}</span>
+          </span>
+        </div>
+      </div>
+      <div>
         <div className="section-title">Algorithm: Can Win Nim</div>
         <div className="section-body">
           <p>{`You are playing the following Nim Game with your friend: There is a heap of stones on the table, each time one of you take turns to remove 1 to 3 stones. The one who removes the last stone will be the winner. You will take the first turn to remove the stones. Both of you are very clever and have optimal strategies for the game. Write a function to determine whether you can win the game given the number of stones in the heap.`}</p>
@@ -299,13 +337,22 @@ export default function App() {
         <div className="section-title">Algorithm: Airport Terminal Gate Reassignment given arrival and departure schedules</div> 
         <div className="section-body">
           <p>{`You are given the arrival and departure times of airplanes at an airport for a single day. Schedules for the airplanes remain the same across all days. You are to determine the number of gates the airport should have so that no plane spends time waiting for a gate.`}</p>
-          <p>{`arr = [9:30, 11:15, 16:30]`}</p>
-          <p>{`dep = [11:45, 11:30, 16:45]`}</p>
+          <p>{`arr = [9:30, 11:15, 16:30, 7:15, 4:15]`}</p>
+          <p>{`dep = [11:45, 11:30, 13:00, 16:45, 11:20]`}</p>
           <p>{`Arr array is sorted by time. And departure array is sorted by corresponding arrival times. Plane 'i' arrives at time arr[i] and departs at time dep[i]`}</p>
           <p>{`Note: After some questions, it was decided that minute was the smallest unit of time we cared about. Gate was considered occupied on the arriving minute, but empty on the departing minute. And that the arrival and departure times could be represented as such as integers. e.g. Day runs from minute 0 to minute 1339 (since using a zero-based index). So our example times represented as:`}</p>
-          <p>{`arr = [570, 675, 990, 435, 255]`}</p>
-          <p>{`dept = [705, 690, 785, 1005, 685]`}</p>
-          <span><label>{`Max number of gates: `}</label><span className="algorithm-result">{maxNumberOfGates([570, 675, 990, 435, 255],[705, 690, 785, 1005, 685])}</span></span>
+          <div className="flit-times-container">
+            <div>
+              <label>{"Enter Arrivals [hh:mm, hh:mm, ...]: "}</label>
+              <input className="flight-times" type="text" ref={arrInput}/>
+            </div>
+            <div>
+              <label>{"Enter Departures [hh:mm, hh:mm, ...]: "}</label>
+              <input className="flight-times" type="text" ref={deptInput}/>
+            </div>
+            <button onClick={calculateMaxNumberOfGates}>Calculate Max Number of Gates</button>
+          </div>
+          <span><label>{`Max number of gates: `}</label><span className="algorithm-result">{maxNumberOfGates}</span></span>
         </div>
       </div>
       <div>

@@ -70,6 +70,10 @@ div.add-card input {
   margin-bottom: 25px;
 }
 
+.flight-times {
+  width: 30em;
+}
+
 .algorithm-result {
   background-color: lightgray;
   font-weight: bold
