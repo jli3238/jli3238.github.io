@@ -133,6 +133,14 @@ export default function App() {
     return [charsWithMaxOccurrences, maxOccurrences];
   }
 
+  function handleBracketStringChange(e) {
+    const str = e.currentTarget.value;
+    const bracketStr = str.replace(/[^\(\[\{\)\]\}]/g, "");
+    setBracketString(bracketStr);
+  }
+
+  function areBracketsMatched() {
+    let matchingArr = [];
     for (let i = 0; i < bracketString.length; i++) {
       const bracket = bracketString.charAt(i);
       if (bracket === '}' && matchingArr[matchingArr.length -1] === '{' ||
