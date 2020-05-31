@@ -11,18 +11,7 @@ export default function App() {
   const [newCardNames, setNewCardNames] = useState(['','','']);
   const DIRECTION_MOVE_LEFT = -1;
   const DIRECTION_MOVE_RIGHT = 1;
-
-  const [heapSize, setHeapSize] = useState(1);
-
-  const [x, setX] = useState(1);
-  const [y, setY] = useState(1);
-
-  const arrInput = useRef(null);
-  const deptInput = useRef(null);
-  const [maxNumberOfGates, setMaxNumberOfGates] = useState(0);
-
-  const [sentenceForPalindromeCheck, setSentenceForPalindromeCheck] = useState('');
-
+  
   const [counter, setCounter] = useState(0);
 
   const [decimalNumber, setDecimalNumber] = useState(0);
@@ -34,6 +23,17 @@ export default function App() {
   const [sentenceForMostOftenCharCheck, setSentenceForMostOftenCharCheck] = useState('');
 
   const [bracketString, setBracketString] = useState('');
+
+  const [heapSize, setHeapSize] = useState(1);
+
+  const [x, setX] = useState(1);
+  const [y, setY] = useState(1);
+
+  const arrInput = useRef(null);
+  const deptInput = useRef(null);
+  const [maxNumberOfGates, setMaxNumberOfGates] = useState(0);
+
+  const [sentenceForPalindromeCheck, setSentenceForPalindromeCheck] = useState('');
 
   function handleMove(columnIdx, cardIdx, direction) {
     const cardMoved = columns[columnIdx].cards[cardIdx];
@@ -348,7 +348,7 @@ export default function App() {
           <p>{`arr = [9:30, 11:15, 16:30, 7:15, 4:15]`}</p>
           <p>{`dep = [11:45, 11:30, 13:00, 16:45, 11:20]`}</p>
           <p>{`Arr array is sorted by time. And departure array is sorted by corresponding arrival times. Plane 'i' arrives at time arr[i] and departs at time dep[i]`}</p>
-          <p>{`Note: After some questions, it was decided that minute was the smallest unit of time we cared about. Gate was considered occupied on the arriving minute, but empty on the departing minute. And that the arrival and departure times could be represented as such as integers. e.g. Day runs from minute 0 to minute 1339 (since using a zero-based index). So our example times represented as:`}</p>
+          <p>{`Note: After some questions, it was decided that minute was the smallest unit of time we cared about. Gate was considered occupied on the arriving minute, but empty on the departing minute. And that the arrival and departure times could be represented as such as integers. e.g. Day runs from minute 0 to minute 1339 (since using a zero-based index). So our example times are represented as minutes passed 00:00.`}</p>
           <div className="flit-times-container">
             <div>
               <label>{"Enter Arrivals [hh:mm, hh:mm, ...]: "}</label>
