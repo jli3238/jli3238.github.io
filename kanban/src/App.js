@@ -172,6 +172,17 @@ export default function App() {
     }
   }, []);
 
+  const [time, setTime] = useState(new Date());
+  useEffect(() => {
+    const timerId = setInterval(() => tick(), 1000);
+    return function cleanup() {
+      clearInterval(timerId);
+    };
+  }, []);
+  function tick() {
+    setTime(new Date());
+  };
+
   const [heapSize, setHeapSize] = useState(1);
   function handleHeapSizeChange(e) {
     const userInput = e.currentTarget.value;
@@ -329,7 +340,7 @@ export default function App() {
             <span className="algorithm-result">{`${areBracketsMatched()}matched.`}</span>
           </span>
         </div>
-      </div>
+      </div>     
       <div>
         <div className="section-title">Using ES6 Promise</div> 
         <div className="section-body">
@@ -348,6 +359,15 @@ export default function App() {
           </span></label></span>
         </div>
       </div>      
+      <div>
+        <div className="section-title">Clock</div> 
+        <div className="section-body">
+          <p>{`A clock that ticks.`}</p>
+          <span><label>{`Rates are as follows: `}<span className="algorithm-result">
+            It is {time.toLocaleTimeString()}.
+          </span></label></span>
+        </div>
+      </div> 
       <div>
         <div className="section-title">Algorithm: Can Win Nim</div>
         <div className="section-body">
