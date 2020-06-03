@@ -132,20 +132,44 @@ export default function App() {
   const [rates, setRates] = useState([]);
   const [ratesError, setRatesError] = useState('');
   const [areRatesLoaded, setAreRatesLoaded] = useState(false);
-  const apiUrl = 'data/rates.json';
+  const ratesApiUrl = 'data/rates.json';
+  const rateRankApiUrl = 'data/rateRank.json';
   useEffect(() => {
-    fetch(apiUrl)
-      .then(response => response.json())
-      .then(
-        result => {
-          setAreRatesLoaded(true);
-          setRates(result);//((data && data.message) || data.statusText);
-        },
-        error => {
-          setAreRatesLoaded(false);
-          setRatesError(error);
-        }
-      )
+    try {
+      fetch(ratesApiUrl)
+        .then(response1 => { 
+          if (response1.ok) {
+            return response1.json(); 
+          } else { 
+            throw Error(response1.statusText); 
+          }})
+        .then(
+          result1 => {
+            fetch(rateRankApiUrl)
+              .then(response2 => {
+                if (response2.ok) {
+                  return response2.json();
+                } else { 
+                  throw Error(response2.statusText); 
+                }})
+              .then(
+                result2 => {
+                  setAreRatesLoaded(true);
+                  const results = result1.map(res1 => { return { ...res1, rank: result2.find(res2 => res1.name === res2.name).rank }; });
+                  setRates(results);
+                },
+                error2 => {
+                  setRatesError(error2);
+                }
+              )
+          },
+          error1 => {
+            setRatesError(error1);
+          }
+        )
+    } catch (error) {
+      setRatesError(error);
+    }
   }, []);
 
   const [heapSize, setHeapSize] = useState(1);
@@ -311,13 +335,14 @@ export default function App() {
         <div className="section-body">
           <p>{`Show fetch data using ES6 promise.`}</p>
           <span><label>{`Rates are as follows: `}<span className="algorithm-result">
-            { areRatesLoaded && <div>Loading...</div> }
+            { areRatesLoaded && <div>Loaded</div> }
             <table className="rates-table">
               { rates && rates.length !== 0 && rates.map(rate => <tr key={rate.name}>
                 <td>{rate.name}</td>
                 <td>{rate.years}</td>
                 <td>{rate.rate}%</td>
-                </tr>) }
+                <td>{rate.rank}</td>
+              </tr>) }
             </table>
             { ratesError !== '' && <div>{ratesError}</div> }
           </span></label></span>
