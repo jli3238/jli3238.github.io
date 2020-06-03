@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Column from './Column';
 import './App.css';
 
@@ -10,31 +10,7 @@ export default function App() {
   ]);
   const [newCardNames, setNewCardNames] = useState(['','','']);
   const DIRECTION_MOVE_LEFT = -1;
-  const DIRECTION_MOVE_RIGHT = 1;
-  
-  const [counter, setCounter] = useState(0);
-
-  const [decimalNumber, setDecimalNumber] = useState(0);
-
-  const [randomColor, setRandomColor] = useState("");
-
-  const [number, setNumber] = useState(1);
-
-  const [sentenceForMostOftenCharCheck, setSentenceForMostOftenCharCheck] = useState('');
-
-  const [bracketString, setBracketString] = useState('');
-
-  const [heapSize, setHeapSize] = useState(1);
-
-  const [x, setX] = useState(1);
-  const [y, setY] = useState(1);
-
-  const arrInput = useRef(null);
-  const deptInput = useRef(null);
-  const [maxNumberOfGates, setMaxNumberOfGates] = useState(0);
-
-  const [sentenceForPalindromeCheck, setSentenceForPalindromeCheck] = useState('');
-
+  const DIRECTION_MOVE_RIGHT = 1;  
   function handleMove(columnIdx, cardIdx, direction) {
     const cardMoved = columns[columnIdx].cards[cardIdx];
     const updatedCardsInColumnMovedFrom = columns[columnIdx].cards.filter(card => card.name !== cardMoved.name);
@@ -49,7 +25,6 @@ export default function App() {
           : column);
     setColumns(updatedColumns);
   }
-
   function handleAddCard(columnIdx) {
     const newCardName = newCardNames[columnIdx].trim();
     const existingCardNames = columns.map(column => column.cards.map(card => card.name)).flat(1);
@@ -60,11 +35,9 @@ export default function App() {
     setColumns(columnsWithNewCardAdded);
     setNewCardNames(['','','']);
   }
-
   function handleNewCardNamesChange(columnIdx, e) {
     setNewCardNames(newCardNames.map((newCardName, newCardNameIndex) => newCardNameIndex === columnIdx ? e.target.value : ''));
   }
-
   function handleDelete(columnIdx, cardIdx) {
     const cardDeleted = columns[columnIdx].cards[cardIdx];
     const updatedCardsInColumnWithDeleted = columns[columnIdx].cards.filter(card => card.name !== cardDeleted.name);
@@ -74,32 +47,33 @@ export default function App() {
     setColumns(updatedColumns);
   }
 
+  const [counter, setCounter] = useState(0);
   function handleCounterButtonClick() {
     setCounter(counter + 1);
   }
-
   function handleCounterResetButtonClick() {
     setCounter(0);
   }
 
+  const [decimalNumber, setDecimalNumber] = useState(0);
   function handleDecimalNumberChange(e) {
     const value = e.currentTarget.value > 0 ? e.currentTarget.value : 0;
     setDecimalNumber(value);
   }
-
   const getHexadecimalNumber = () => parseInt(decimalNumber, 10).toString(16);
 
+  const [randomColor, setRandomColor] = useState("");
   function handlePickRandomColorButtonClick() {
     const num = (val) => Math.floor(Math.random()*(val + 1));
     const clr = `rgb(${num(255)},${num(255)},${num(255)});`;
     setRandomColor(clr);
   }
 
+  const [number, setNumber] = useState(1);
   function handleNumberChange(e) {
     const num = e.currentTarget.value;
     setNumber(num > 1 ? num : 1);    
   }
-
   function isPrimeNumber() {
     if (number < 2) return "is";
     for (let i=2; i<=Math.sqrt(number); i++) {
@@ -108,10 +82,10 @@ export default function App() {
     return "is";
   }
 
+  const [sentenceForMostOftenCharCheck, setSentenceForMostOftenCharCheck] = useState('');
   function handleSentenceForMostOftenCharChange(e) {
     setSentenceForMostOftenCharCheck(e.currentTarget.value);
   }
-
   function getMostOftenChar() {
     let charOccurrencesPairs = {};
     for (let i=0; i<sentenceForMostOftenCharCheck.length; i++) {
@@ -133,19 +107,19 @@ export default function App() {
     return [charsWithMaxOccurrences, maxOccurrences];
   }
 
+  const [bracketString, setBracketString] = useState('');
   function handleBracketStringChange(e) {
     const str = e.currentTarget.value;
-    const bracketStr = str.replace(/[^\(\[\{\)\]\}]/g, "");
+    const bracketStr = str.replace(/[^([{)\]}]/g, "");
     setBracketString(bracketStr);
   }
-
   function areBracketsMatched() {
     let matchingArr = [];
     for (let i = 0; i < bracketString.length; i++) {
       const bracket = bracketString.charAt(i);
-      if (bracket === '}' && matchingArr[matchingArr.length -1] === '{' ||
-          bracket === ']' && matchingArr[matchingArr.length -1] === '[' ||
-          bracket === ')' && matchingArr[matchingArr.length -1] === '(') {
+      if ((bracket === '}' && matchingArr[matchingArr.length -1] === '{') ||
+          (bracket === ']' && matchingArr[matchingArr.length -1] === '[') ||
+          (bracket === ')' && matchingArr[matchingArr.length -1] === '(')) {
           matchingArr = matchingArr.slice(0, matchingArr.length - 1);
       }else{
         if (['}', ']', ')'].includes(bracket)) return 'not ';
@@ -155,20 +129,40 @@ export default function App() {
     return matchingArr.length === 0 ? '' : 'not ';
   }
 
+  const [rates, setRates] = useState([]);
+  const [ratesError, setRatesError] = useState('');
+  const [areRatesLoaded, setAreRatesLoaded] = useState(false);
+  const apiUrl = 'data/rates.json';
+  useEffect(() => {
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(
+        result => {
+          setAreRatesLoaded(true);
+          setRates(result);//((data && data.message) || data.statusText);
+        },
+        error => {
+          setAreRatesLoaded(false);
+          setRatesError(error);
+        }
+      )
+  }, []);
+
+  const [heapSize, setHeapSize] = useState(1);
   function handleHeapSizeChange(e) {
     const userInput = e.currentTarget.value;
     setHeapSize(userInput > 0 ? userInput : 1);
   }
-
   function canWinNim(n) {
     return n % 4 !== 0 ? "Yes" : "No";
   }
 
+  const [x, setX] = useState(1);
+  const [y, setY] = useState(1);
   function handleXChange(e) {
     const x = e.currentTarget.value;
     setX(x > 0 && x < 231 ? x : 1);
   }
-
   function handleYChange(e) {
     const y = e.currentTarget.value;
     setY(y > 0 && y < 231 ? y : 1);
@@ -184,6 +178,9 @@ export default function App() {
     return diff;
   };
 
+  const arrInput = useRef(null);
+  const deptInput = useRef(null);
+  const [maxNumberOfGates, setMaxNumberOfGates] = useState(0);
   function calculateMaxNumberOfGates() {
     const arr = arrInput.current.value.split(', ').map(i=>
       i.split(':').map(j=>parseInt(j, 10)).reduce((total, min) => total * 60 + min)); //[570, 675, 990, 435, 255];
@@ -204,10 +201,10 @@ export default function App() {
     setMaxNumberOfGates(maxNumber);
   }
 
+  const [sentenceForPalindromeCheck, setSentenceForPalindromeCheck] = useState('');
   function handlePalindromeSentenceChange(e) {
     setSentenceForPalindromeCheck(e.currentTarget.value);
   }
-
   function isPalindrome() {
     const sentenceWithCharacterOnly = sentenceForPalindromeCheck.replace(/[^\w]|_/g, "").toLowerCase();
     let isPalindrome = true;
@@ -309,6 +306,23 @@ export default function App() {
           </span>
         </div>
       </div>
+      <div>
+        <div className="section-title">Using ES6 Promise</div> 
+        <div className="section-body">
+          <p>{`Show fetch data using ES6 promise.`}</p>
+          <span><label>{`Rates are as follows: `}<span className="algorithm-result">
+            { areRatesLoaded && <div>Loading...</div> }
+            <table className="rates-table">
+              { rates && rates.length !== 0 && rates.map(rate => <tr key={rate.name}>
+                <td>{rate.name}</td>
+                <td>{rate.years}</td>
+                <td>{rate.rate}%</td>
+                </tr>) }
+            </table>
+            { ratesError !== '' && <div>{ratesError}</div> }
+          </span></label></span>
+        </div>
+      </div>      
       <div>
         <div className="section-title">Algorithm: Can Win Nim</div>
         <div className="section-body">
