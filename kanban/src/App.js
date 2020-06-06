@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Column from './Column';
 import './App.css';
 
-export default function App() {
+const App = () => {
   const [columns, setColumns] = useState([
     {name: 'Backlog', cards: [{name:'Card A'}]},
     {name: 'Inprogress', cards: [{name:'Card B'}]},
@@ -10,7 +10,7 @@ export default function App() {
   ]);
   const [newCardNames, setNewCardNames] = useState(['','','']);
   const DIRECTION_MOVE_LEFT = -1;
-  const DIRECTION_MOVE_RIGHT = 1;  
+  const DIRECTION_MOVE_RIGHT = 1;
   function handleMove(columnIdx, cardIdx, direction) {
     const cardMoved = columns[columnIdx].cards[cardIdx];
     const updatedCardsInColumnMovedFrom = columns[columnIdx].cards.filter(card => card.name !== cardMoved.name);
@@ -56,6 +56,10 @@ export default function App() {
   }
 
   const [decimalNumber, setDecimalNumber] = useState(0);
+  const decimalNumberToHexadecimalNumberRef = useRef(null);
+  useEffect(() => {
+    decimalNumberToHexadecimalNumberRef.current.focus();
+  }, [counter])  
   function handleDecimalNumberChange(e) {
     const value = e.currentTarget.value > 0 ? e.currentTarget.value : 0;
     setDecimalNumber(value);
@@ -183,6 +187,23 @@ export default function App() {
     setTime(new Date());
   };
 
+  function FancyBorder(props) {
+    return (<div className={"fancyborder-" + props.color}>{props.children}</div>);
+  }
+  function DialogContainment(props) {
+    return (<FancyBorder color={props.color}>
+      <h5 className="Dialog-title">Welcome</h5>
+      <p className="Dialog-message">Thank you for visiting our spacecraft-Containment! </p>       
+    </FancyBorder>)
+  }
+  function DialogSpecialization(props) {
+    return (<FancyBorder color="green">
+      <h5 className="Dialog-title">{props.title}</h5>
+      <p className="Dialog-message">{props.message}</p>
+    </FancyBorder>
+    );
+  }
+
   const [heapSize, setHeapSize] = useState(1);
   function handleHeapSizeChange(e) {
     const userInput = e.currentTarget.value;
@@ -256,7 +277,7 @@ export default function App() {
         <div className="app-kanban">
           {columns.length > 0 && columns.map((column, columnIndex) =>
             <Column 
-              key={column.name} 
+              key={column.name}
               column={column}
               columnIndex={columnIndex}
               newCardNames={newCardNames}
@@ -284,7 +305,7 @@ export default function App() {
           <p>{`Convert a decimal number to hexadecimal number.`}</p>
           <div>
             <label>Enter a decimal number to convert: </label>
-            <input type="number" value={decimalNumber} onChange={e=>handleDecimalNumberChange(e)}/>
+            <input type="number" value={decimalNumber} ref={decimalNumberToHexadecimalNumberRef} onChange={e=>handleDecimalNumberChange(e)}/>
           </div>
           <span><label>{`The hexadecimal of it is: `}</label><span className="algorithm-result">{getHexadecimalNumber()}</span></span>
         </div>
@@ -348,12 +369,15 @@ export default function App() {
           <span><label>{`Rates are as follows: `}<span className="algorithm-result">
             { areRatesLoaded && <div>Loaded</div> }
             <table className="rates-table">
-              { rates && rates.length !== 0 && rates.map(rate => <tr key={rate.name}>
-                <td>{rate.name}</td>
-                <td>{rate.years}</td>
-                <td>{rate.rate}%</td>
-                <td>{rate.rank}</td>
-              </tr>) }
+              <thead><tr><th>Name</th><th>Years</th><th>Rate</th><th>Rank</th></tr></thead>
+              <tbody>
+                { rates && rates.length !== 0 && rates.map(rate => <tr key={rate.name}>
+                  <td>{rate.name}</td>
+                  <td>{rate.years}</td>
+                  <td>{rate.rate}%</td>
+                  <td>{rate.rank}</td>
+                </tr>) }
+              </tbody>
             </table>
             { ratesError !== '' && <div>{ratesError}</div> }
           </span></label></span>
@@ -367,7 +391,16 @@ export default function App() {
             It is {time.toLocaleTimeString()}.
           </span></label></span>
         </div>
-      </div> 
+      </div>
+      <div>
+        <div className="section-title">Containment and Specilization</div> 
+        <div className="section-body">
+          <p>{`Containment`}</p>
+          <DialogContainment color="blue" />
+          <p>{`Specialization`}</p>
+          <DialogSpecialization title="Welcome" message="Thank you for visiting our spacecraft-Specialization!" />
+        </div>
+      </div>
       <div>
         <div className="section-title">Algorithm: Can Win Nim</div>
         <div className="section-body">
@@ -436,3 +469,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;

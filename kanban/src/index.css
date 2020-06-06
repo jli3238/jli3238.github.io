@@ -79,6 +79,14 @@ div.add-card input {
   font-weight: bold
 }
 
-.rates-table td {
-  border: 1px solid purple;
+.rates-table td, .rates-table th {
+  border: 1px solid coral;
+}
+
+.section-body .fancyborder-blue {
+  border: 2px solid cornflowerblue;
+}
+
+.section-body .fancyborder-green {
+  border: 2px solid mediumseagreen;
 }

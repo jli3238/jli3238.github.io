@@ -2,31 +2,30 @@ import React from 'react';
 import Card from './Card';
 import './App.css';
 
-export default function Column({column, columnIndex, onMoveLeft, onDelete, onMoveRight, onAddCard, newCardNames, onNewCardNamesChange}) {
-  return (
+ const Column = props =>
     <div className="column">
-      <div className="columnTitle">{column.name}</div>
+      <div className="columnTitle">{props.column.name}</div>
       <div className="cards">
-        {column && column.cards && column.cards.length > 0 && column.cards.map((card, cardIndex) =>
+        {props.column && props.column.cards && props.column.cards.length > 0 && props.column.cards.map((card, cardIndex) =>
           <Card 
             key={card.name} 
             card={card}
             cardIndex={cardIndex} 
-            first={columnIndex === 0}
-            last={columnIndex === 2}
-            onMoveLeft={() => onMoveLeft(cardIndex)}
-            onDelete={() => onDelete(cardIndex)}
-            onMoveRight={() => onMoveRight(cardIndex)} />
+            first={props.columnIndex === 0}
+            last={props.columnIndex === 2}
+            onMoveLeft={() => props.onMoveLeft(cardIndex)}
+            onDelete={() => props.onDelete(cardIndex)}
+            onMoveRight={() => props.onMoveRight(cardIndex)} />
         )}
       </div>
       <div className="add-card">
         <input 
-          type="text" 
-          value={newCardNames[columnIndex]} 
-          onChange={e => onNewCardNamesChange(e)} 
+          type="text"
+          value={props.newCardNames[props.columnIndex]} 
+          onChange={e => props.onNewCardNamesChange(e)} 
           placeholder="Type new card name..." />
-        <button onClick={() => onAddCard()}>{"+"}</button>
+        <button onClick={() => props.onAddCard()}>{"+"}</button>
       </div>
     </div>
-  );
-}
+
+export default Column;

@@ -1,18 +1,11 @@
 import React from 'react';
 import './App.css';
 
-export default function Card({
-  card,
-  first, 
-  last,
-  onMoveLeft,
-  onDelete,
-  onMoveRight}) {
-  return (
+const Card = props => 
     <div className="card">
-      {!first && <button onClick={onMoveLeft}>{"<"}</button>}
-      <span>{card.name}<button onClick={onDelete}>{"-"}</button></span>
-      {!last && <button onClick={onMoveRight}>{">"}</button>}
+      {!props.first && <button onClick={props.onMoveLeft}>{"<"}</button>}
+      <span>{props.card.name}<button onClick={props.onDelete}>{"-"}</button></span>
+      {!props.last && <button onClick={props.onMoveRight}>{">"}</button>}
     </div>
-  );
-}
+
+export default Card;
