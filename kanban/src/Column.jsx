@@ -1,6 +1,6 @@
 import React from 'react';
-import Card from './Card';
-import './App.css';
+import Card from '../src/Card';
+import '../src/css/App.css';
 
  const Column = props =>
     <div className="column">
