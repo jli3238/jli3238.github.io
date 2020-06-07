@@ -12,7 +12,7 @@ const RandomColor = () => {
     return (
         <PageContainer 
             title='Pick a Random Color' 
-            description='Pick a random color by click the button.'
+            description='Pick a random color by clicking the button.'
             resultDescription='The current color is: '
             result={randomColor} >
             <div>

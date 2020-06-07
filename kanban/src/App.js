@@ -20,20 +20,20 @@ import './css/App.css';
 const App = props =>
   <>
     <div>
-      <div><Link to="/BracketMatch">BracketMatch </Link></div>
-      <div><Link to="/CanWinNim">CanWinNim </Link>
+      <div><Link to="/BracketMatch">BracketMatch </Link>
+      <Link to="/CanWinNim">CanWinNim </Link>
       <Link to="/ClockTicker">ClockTicker </Link>
       <Link to="/ComponentComposition">ComponentComposition </Link>
       <Link to="/Counter">Counter </Link></div>
-      <div><Link to="/DecimalToHexadecimal">DecimalToHexadecimal </Link></div>
-      <div><Link to="/ES6Promise">ES6Promise </Link></div>
-      <div><Link to="/HammingDistance">HammingDistance </Link></div>
-      <div><Link to="/">Kanban </Link></div>
+      <div><Link to="/DecimalToHexadecimal">DecimalToHexadecimal </Link>
+      <Link to="/ES6Promise">ES6Promise </Link>
+      <Link to="/HammingDistance">HammingDistance </Link>
+      <Link to="/">Kanban </Link></div>
       <div><Link to="/MinimumNumberOfGates">MinimumNumberOfGates </Link>
-      <Link to="/MostFrequentChar">MostFrequentChar </Link></div>
-      <div><Link to="/Palindrome">Palindrome </Link>
-      <Link to="/PrimeNumberCheck">PrimeNumberCheck </Link></div>
-      <div><Link to="/RandomColor">RandomColor </Link></div>
+      <Link to="/MostFrequentChar">MostFrequentChar </Link>
+      <Link to="/Palindrome">Palindrome </Link>
+      <Link to="/PrimeNumberCheck">PrimeNumberCheck </Link>
+      <Link to="/RandomColor">RandomColor </Link></div>
     </div>
     <Switch>
       <Route path="/BracketMatch" component={BracketMatch} />
