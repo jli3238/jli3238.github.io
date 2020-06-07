@@ -15,6 +15,8 @@ code {
 
 .column {
   border: solid 1px gray;
+  border-radius: 5px;
+  box-shadow: 5px 10px #888888;
   flex-grow: 1;
   margin: 25px;
   position: relative;
@@ -37,10 +39,19 @@ code {
 
 .card span {
   flex-grow: 1;
+  border-radius: 5px;
+}
+
+.card button {
+  border-radius: 10px;
+  font-weight: bolder;
+  color: orange;
 }
 
 .card span button {
-  margin-left: 5px;
+  border-radius: 10px;
+  font-weight: bolder;
+  color: red;
 }
 
 div.add-card {
@@ -51,6 +62,14 @@ div.add-card {
 
 div.add-card input {
   margin-right: 5px;
+  border-radius: 5px;
+  box-shadow: 2px 3px royalblue;
+}
+
+div.add-card button {
+  border-radius: 10px;
+  font-weight: bolder;
+  color: green;
 }
 
 .title {
@@ -66,6 +85,8 @@ div.add-card input {
 
 .section-body {
   border: solid 1px gray !important;
+  border-radius: 5px;
+  box-shadow: 5px 10px #888888;
   margin-left: 5px;
   margin-bottom: 25px;
 }
@@ -88,7 +109,23 @@ div.add-card input {
 }
 
 .section-body .fancyborder-green {
-  border: 2px solid mediumseagreen;
+  border: 5px solid mediumseagreen;
+}
+
+.section-body button {
+  border: 3px;
+  border-radius: 5px;
+  box-shadow: 2px 3px royalblue;
+  color: midnightblue;
+  margin: 10px;
+}
+
+.section-body input {
+  border: 3px;
+  border-radius: 5px;
+  box-shadow: 2px 3px royalblue;
+  color: midnightblue;
+  margin: 10px;
 }
 
 .links {
@@ -96,4 +133,12 @@ div.add-card input {
   flex-direction: column;
   flex-wrap: wrap;
   height: 100px;
+}
+
+.links a {
+  color: midnightblue;
+}
+
+.links a:visited {
+  color: gray;
 }
