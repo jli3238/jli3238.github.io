@@ -1,15 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Column from '../src/Column';
 
 const Kanban = () => {
     const [columns, setColumns] = useState([
-        {name: 'Backlog', cards: [{name:'Card A'}]},
-        {name: 'Inprogress', cards: [{name:'Card B'}]},
-        {name: 'Done', cards: [{name:'Card C'}]}
+        
       ]);
+      const [columnsError, setColumnsError] = useState('');
       const [newCardNames, setNewCardNames] = useState(['','','']);
       const DIRECTION_MOVE_LEFT = -1;
       const DIRECTION_MOVE_RIGHT = 1;
+      const columnsApiUrl = 'data/columns.json';
+      useEffect(() => {
+        try {
+          fetch(columnsApiUrl)
+            .then(response => {
+              if (response.ok) {
+                return response.json();
+              } else {
+                throw Error(response.statusText);
+              }
+            })
+            .then(
+              result => {
+                setColumns(result);
+              },
+              error => {
+                setColumnsError(error);
+              })
+        } catch (error) {
+          setColumnsError(error);
+        }
+      }, []);
+
       function handleMove(columnIdx, cardIdx, direction) {
         const cardMoved = columns[columnIdx].cards[cardIdx];
         const updatedCardsInColumnMovedFrom = columns[columnIdx].cards.filter(card => card.name !== cardMoved.name);
@@ -50,6 +72,7 @@ const Kanban = () => {
         <>
             <div className="section-title">Kanban App</div>
             <div className="app-kanban">
+            {columnsError && <div>Something is wrong when loading columns data.</div>}
             {columns.length > 0 && columns.map((column, columnIndex) =>
                 <Column 
                 key={column.name}

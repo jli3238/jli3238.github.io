@@ -1,0 +1,5 @@
+[
+    {"name": "Backlog", "cards": [{"name":"Card A"}, {"name":"Card a"}, {"name":"A"}]},
+    {"name": "Inprogress", "cards": [{"name":"Card B"}, {"name":"Card b"}, {"name":"B"}]},
+    {"name": "Done", "cards": [{"name":"Card C"}, {"name":"Card c"}, {"name":"C"}]}
+]
