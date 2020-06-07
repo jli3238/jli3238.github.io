@@ -22,7 +22,7 @@ const ComponentComposition = () => {
   return (
     <PageContainer 
         title='Component Composition'
-        description='Containment and Specilization'>
+        description='Component Composition'>
         <div>
           <p>Containment</p>
           <DialogContainment color="blue" />
