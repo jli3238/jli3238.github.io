@@ -90,3 +90,10 @@ div.add-card input {
 .section-body .fancyborder-green {
   border: 2px solid mediumseagreen;
 }
+
+.links {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100px;
+}

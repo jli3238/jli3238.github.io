@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
+import styled from 'styled-components';
 import BracketMatch from '../src/BracketMatch';
 import CanWinNim from '../src/CanWinNim';
 import ClockTicker from '../src/ClockTicker';
@@ -17,23 +18,27 @@ import RandomColor from '../src/RandomColor';
 
 import './css/App.css';
 
+const SpacedLink = styled.span`
+  flex-basis: 25%;
+`;
+
 const App = props =>
   <>
-    <div>
-      <div><Link to="/BracketMatch">BracketMatch </Link>
-      <Link to="/CanWinNim">CanWinNim </Link>
-      <Link to="/ClockTicker">ClockTicker </Link>
-      <Link to="/ComponentComposition">ComponentComposition </Link>
-      <Link to="/Counter">Counter </Link></div>
-      <div><Link to="/DecimalToHexadecimal">DecimalToHexadecimal </Link>
-      <Link to="/ES6Promise">ES6Promise </Link>
-      <Link to="/HammingDistance">HammingDistance </Link>
-      <Link to="/">Kanban </Link></div>
-      <div><Link to="/MinimumNumberOfGates">MinimumNumberOfGates </Link>
-      <Link to="/MostFrequentChar">MostFrequentChar </Link>
-      <Link to="/Palindrome">Palindrome </Link>
-      <Link to="/PrimeNumberCheck">PrimeNumberCheck </Link>
-      <Link to="/RandomColor">RandomColor </Link></div>
+    <div className='links'>
+      <SpacedLink><Link to="/BracketMatch">BracketMatch </Link></SpacedLink>
+      <SpacedLink><Link to="/CanWinNim">CanWinNim </Link></SpacedLink>
+      <SpacedLink><Link to="/ClockTicker">ClockTicker </Link></SpacedLink>
+      <SpacedLink><Link to="/ComponentComposition">ComponentComposition </Link></SpacedLink>
+      <SpacedLink><Link to="/Counter">Counter </Link></SpacedLink>
+      <SpacedLink><Link to="/DecimalToHexadecimal">DecimalToHexadecimal </Link></SpacedLink>
+      <SpacedLink><Link to="/ES6Promise">ES6Promise </Link></SpacedLink>
+      <SpacedLink><Link to="/HammingDistance">HammingDistance </Link></SpacedLink>
+      <SpacedLink><Link to="/">Kanban </Link></SpacedLink>
+      <SpacedLink><Link to="/MinimumNumberOfGates">MinimumNumberOfGates </Link></SpacedLink>
+      <SpacedLink><Link to="/MostFrequentChar">MostFrequentChar </Link></SpacedLink>
+      <SpacedLink><Link to="/Palindrome">Palindrome </Link></SpacedLink>
+      <SpacedLink><Link to="/PrimeNumberCheck">PrimeNumberCheck </Link></SpacedLink>
+      <SpacedLink><Link to="/RandomColor">RandomColor </Link></SpacedLink>
     </div>
     <Switch>
       <Route path="/BracketMatch" component={BracketMatch} />
