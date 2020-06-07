@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PageContainer from '../src/PageContainer';
 
 const ES6Promise = () => {
     
@@ -44,28 +45,26 @@ const ES6Promise = () => {
       setRatesError(error);
     }
   }, []);
+
   return (
-    <>
-        <div className="section-title">Using ES6 Promise</div> 
-        <div className="section-body">
-          <p>{`Show fetch data using ES6 promise.`}</p>
-          <span><label>{`Rates are as follows: `}<span className="algorithm-result">
-            { areRatesLoaded && <div>Loaded</div> }
-            <table className="rates-table">
-              <thead><tr><th>Name</th><th>Years</th><th>Rate</th><th>Rank</th></tr></thead>
-              <tbody>
-                { rates && rates.length !== 0 && rates.map(rate => <tr key={rate.name}>
-                  <td>{rate.name}</td>
-                  <td>{rate.years}</td>
-                  <td>{rate.rate}%</td>
-                  <td>{rate.rank}</td>
-                </tr>) }
-              </tbody>
-            </table>
-            { ratesError !== '' && <div>{ratesError}</div> }
-          </span></label></span>
-        </div>
-    </>)     
+    <PageContainer 
+        title='Using ES6 Promise'
+        description='Show fetch data using ES6 promise.'>        
+        { ratesError !== '' && <div>{ratesError}</div>}
+        { areRatesLoaded && <div>Loaded</div>}
+        <div>Rates are as follows: </div> 
+        <table className="rates-table">
+            <thead><tr><th>Name</th><th>Years</th><th>Rate</th><th>Rank</th></tr></thead>
+            <tbody>
+            { rates && rates.length !== 0 && rates.map(rate => <tr key={rate.name}>
+                <td>{rate.name}</td>
+                <td>{rate.years}</td>
+                <td>{rate.rate}%</td>
+                <td>{rate.rank}</td>
+            </tr>)}
+            </tbody>
+        </table>
+    </PageContainer>)     
 }
 
 export default ES6Promise;

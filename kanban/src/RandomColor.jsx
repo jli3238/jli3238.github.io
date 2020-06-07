@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PageContainer from '../src/PageContainer';
 
 const RandomColor = () => {
     const [randomColor, setRandomColor] = useState("");
@@ -7,17 +8,17 @@ const RandomColor = () => {
       const clr = `rgb(${num(255)},${num(255)},${num(255)});`;
       setRandomColor(clr);
     }
+
     return (
-        <>
-            <div className="section-title">Pick a Random Color</div> 
-            <div className="section-body">
-                <p>{`Pick a random color by click the button.`}</p>
-                <div>
-                    <button onClick={e=>handlePickRandomColorButtonClick(e)}>Pick a random color</button>
-                </div>
-                <span><label>{`The current color is: `}</label><span className="algorithm-result">{randomColor}</span></span>
+        <PageContainer 
+            title='Pick a Random Color' 
+            description='Pick a random color by click the button.'
+            resultDescription='The current color is: '
+            result={randomColor} >
+            <div>
+                <button onClick={e=>handlePickRandomColorButtonClick(e)}>Pick a random color</button>
             </div>
-        </>)
+        </PageContainer>)
 }
 
 export default RandomColor;

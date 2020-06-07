@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import PageContainer from '../src/PageContainer';
 
 const MinimumNumberOfGates = () => {
     
@@ -24,16 +25,18 @@ const MinimumNumberOfGates = () => {
     }
     setMaxNumberOfGates(maxNumber);
   }
+
   return (
-    <>
-        <div className="section-title">Algorithm: Airport Terminal Gate Reassignment given arrival and departure schedules</div> 
-        <div className="section-body">
-            <p>{`You are given the arrival and departure times of airplanes at an airport for a single day. Schedules for the airplanes remain the same across all days. You are to determine the number of gates the airport should have so that no plane spends time waiting for a gate.`}</p>
-            <p>{`arr = [9:30, 11:15, 16:30, 7:15, 4:15]`}</p>
-            <p>{`dep = [11:45, 11:30, 13:00, 16:45, 11:20]`}</p>
-            <p>{`Arr array is sorted by time. And departure array is sorted by corresponding arrival times. Plane 'i' arrives at time arr[i] and departs at time dep[i]`}</p>
-            <p>{`Note: After some questions, it was decided that minute was the smallest unit of time we cared about. Gate was considered occupied on the arriving minute, but empty on the departing minute. And that the arrival and departure times could be represented as such as integers. e.g. Day runs from minute 0 to minute 1339 (since using a zero-based index). So our example times are represented as minutes passed 00:00.`}</p>
-            <div className="flit-times-container">
+    <PageContainer 
+        title='Algorithm: Airport Terminal Gate Reassignment given arrival and departure schedules' 
+        resultDescription='Max number of gates: '
+        result={maxNumberOfGates}>
+        <p>{`You are given the arrival and departure times of airplanes at an airport for a single day. Schedules for the airplanes remain the same across all days. You are to determine the number of gates the airport should have so that no plane spends time waiting for a gate.`}</p>
+        <p>{`arr = [9:30, 11:15, 16:30, 7:15, 4:15]`}</p>
+        <p>{`dep = [11:45, 11:30, 13:00, 16:45, 11:20]`}</p>
+        <p>{`Arr array is sorted by time. And departure array is sorted by corresponding arrival times. Plane "i" arrives at time arr[i] and departs at time dep[i]`}</p>
+        <p>{`Note: After some questions, it was decided that minute was the smallest unit of time we cared about. Gate was considered occupied on the arriving minute, but empty on the departing minute. And that the arrival and departure times could be represented as such as integers. e.g. Day runs from minute 0 to minute 1339 (since using a zero-based index). So our example times are represented as minutes passed 00:00.`}</p>
+        <div>
             <div>
                 <label>{"Enter Arrivals [hh:mm, hh:mm, ...]: "}</label>
                 <input className="flight-times" type="text" ref={arrInput}/>
@@ -43,10 +46,8 @@ const MinimumNumberOfGates = () => {
                 <input className="flight-times" type="text" ref={deptInput}/>
             </div>
             <button onClick={calculateMaxNumberOfGates}>Calculate Max Number of Gates</button>
-            </div>
-            <span><label>{`Max number of gates: `}</label><span className="algorithm-result">{maxNumberOfGates}</span></span>
         </div>
-    </>)
+    </PageContainer>)
 }
 
 export default MinimumNumberOfGates;

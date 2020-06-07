@@ -1,6 +1,7 @@
 import React from 'react';
+import PageContainer from './PageContainer';
 
-const ObjectComposition = () => {
+const ComponentComposition = () => {
   function FancyBorder(props) {
     return (<div className={"fancyborder-" + props.color}>{props.children}</div>);
   }
@@ -17,16 +18,18 @@ const ObjectComposition = () => {
     </FancyBorder>
     );
   }
+
   return (
-    <>
-        <div className="section-title">Containment and Specilization</div> 
-        <div className="section-body">
-          <p>{`Containment`}</p>
+    <PageContainer 
+        title='Component Composition'
+        description='Containment and Specilization'>
+        <div>
+          <p>Containment</p>
           <DialogContainment color="blue" />
-          <p>{`Specialization`}</p>
+          <p>Specialization</p>
           <DialogSpecialization title="Welcome" message="Thank you for visiting our spacecraft-Specialization!" />
         </div>
-    </>)
+    </PageContainer>)
 }
 
-export default ObjectComposition;
+export default ComponentComposition;

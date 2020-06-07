@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import PageContainer from '../src/PageContainer';
 
 const ClockTicker = () => {
+    
   const [time, setTime] = useState(new Date());
   useEffect(() => {
     const timerId = setInterval(() => tick(), 1000);
@@ -13,15 +15,13 @@ const ClockTicker = () => {
   };
 
   return (
-    <>
-        <div className="section-title">Clock</div> 
-        <div className="section-body">
-            <p>{`A clock that ticks.`}</p>
-            <span><label>{`The current time is: `}<span className="algorithm-result">
-             {time.toLocaleTimeString()}.
-            </span></label></span>
-        </div>
-    </>)
+    <PageContainer 
+        title='Clock'
+        description='A clock that ticks.'
+        resultDescription='The current time is: '
+        result={`${time.toLocaleTimeString()}.`}>
+    </PageContainer>
+    )
 }
 
 export default ClockTicker;

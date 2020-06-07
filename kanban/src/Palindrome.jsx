@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PageContainer from '../src/PageContainer';
 
 const Palindrome = () => {    
   const [sentenceForPalindromeCheck, setSentenceForPalindromeCheck] = useState('');
@@ -13,18 +14,18 @@ const Palindrome = () => {
     }
     return isPalindrome.toString();
   }
+
   return (
-    <>
-        <div className="section-title">Algorithm: Palindrome</div> 
-        <div className="section-body">
-            <p>{`A palindrome is a word, phrase, number or sequence of words that reads the same backward as forward. Punctuation and spaces between the words or lettering is allowed.`}</p>
-            <div>
+    <PageContainer 
+        title='Algorithm: Palindrome' 
+        description='A palindrome is a word, phrase, number or sequence of words that reads the same backward as forward. Punctuation and spaces between the words or lettering is allowed.'
+        resultDescription='Is it Palindrome: '
+        result={isPalindrome(sentenceForPalindromeCheck)} >    
+        <div>
             <label>{"Enter a sentence here: "}</label>
             <input type="text" value={sentenceForPalindromeCheck} onChange={e=>handlePalindromeSentenceChange(e)}/>
-            </div>
-            <span><label>{`Is it Palindrome: `}</label><span className="algorithm-result">{isPalindrome(sentenceForPalindromeCheck)}</span></span>
         </div>
-    </>)
+    </PageContainer>)
 }
 
 export default Palindrome; 

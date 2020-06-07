@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PageContainer from '../src/PageContainer';
 
 const HammingDistance = () => {
   const [x, setX] = useState(1);
@@ -20,26 +21,26 @@ const HammingDistance = () => {
     }
     return diff;
   };
+
   return (
-    <>
-        <div className="section-title">Algorithm: Hamming Distance</div>
-        <div className="section-body">
-            <p>{`The Hamming distance between two integers is the number of positions at which the corresponding bits are different. Given two integers x and y, calculate the Hamming distance.`}</p>
-            <p>{`Note: 0 ≤ x, y < 231.`}</p>
-            <p>{`Example: Input: x = 1, y = 4; Output: 2;`}</p>
-            <p>{`Explanation:`}</p>
-            <p>{`1 (0 0 0 1)`}</p>
-            <p>{`4 (0 1 0 0)`}</p>
-            <p>{`The second and fourth positions are where the corresponding bits are different.`}</p>
-            <div>
-                <label>{"Enter x: "}</label>
-                <input type="number" value={x} onChange={e=>handleXChange(e)}/>
-                <label>{"Enter y: "}</label>
-                <input type="number" value={y} onChange={e=>handleYChange(e)}/>
-            </div>
-            <span><label>{`Hamming Distance: `}</label><span className="algorithm-result">{hammingDistance(x,y)}</span></span>
+    <PageContainer
+        title='Algorithm: Hamming Distance'
+        resultDescription='Hamming Distance: '
+        result={hammingDistance(x,y)}>
+        <p>{`The Hamming distance between two integers is the number of positions at which the corresponding bits are different. Given two integers x and y, calculate the Hamming distance.`}</p>
+        <p>{`Note: 0 ≤ x, y < 231.`}</p>
+        <p>{`Example: Input: x = 1, y = 4; Output: 2;`}</p>
+        <p>{`Explanation:`}</p>
+        <p>{`1 (0 0 0 1)`}</p>
+        <p>{`4 (0 1 0 0)`}</p>
+        <p>{`The second and fourth positions are where the corresponding bits are different.`}</p>
+        <div>
+            <label>{"Enter x: "}</label>
+            <input type="number" value={x} onChange={e=>handleXChange(e)}/>
+            <label>{"Enter y: "}</label>
+            <input type="number" value={y} onChange={e=>handleYChange(e)}/>
         </div>
-    </>)
+    </PageContainer>)
 }
 
 export default HammingDistance;

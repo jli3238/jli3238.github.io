@@ -1,4 +1,5 @@
 import React, { useEffect, useRef,useState } from 'react';
+import PageContainer from '../src/PageContainer';
 
 const DecimalToHexadecimal = props => {
     
@@ -11,19 +12,20 @@ const DecimalToHexadecimal = props => {
     const value = e.currentTarget.value > 0 ? e.currentTarget.value : 0;
     setDecimalNumber(value);
   }
+
   const getHexadecimalNumber = () => parseInt(decimalNumber, 10).toString(16);
+
   return (
-    <>
-        <div className="section-title">Convert a Decimal Number to Hexadecimal Number</div> 
-        <div className="section-body">
-          <p>{`Convert a decimal number to hexadecimal number.`}</p>
-          <div>
+    <PageContainer 
+        title='Convert a Decimal Number to Hexadecimal Number' 
+        description='Convert a decimal number to hexadecimal number.'
+        resultDescription='The hexadecimal of it is: '
+        result={getHexadecimalNumber()}>
+        <div>
             <label>Enter a decimal number to convert: </label>
             <input type="number" value={decimalNumber} ref={decimalNumberToHexadecimalNumberRef} onChange={e=>handleDecimalNumberChange(e)}/>
-          </div>
-          <span><label>{`The hexadecimal of it is: `}</label><span className="algorithm-result">{getHexadecimalNumber()}</span></span>
         </div>
-      </>)
+    </PageContainer>)
 }
 
 export default DecimalToHexadecimal;

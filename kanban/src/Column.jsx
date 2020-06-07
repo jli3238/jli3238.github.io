@@ -3,6 +3,7 @@ import Card from '../src/Card';
 import '../src/css/App.css';
 
  const Column = props =>
+ 
     <div className="column">
       <div className="columnTitle">{props.column.name}</div>
       <div className="cards">

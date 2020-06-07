@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PageContainer from '../src/PageContainer';
 
 const MostFrequentChar = () => {   
   const [sentenceForMostOftenCharCheck, setSentenceForMostOftenCharCheck] = useState('');
@@ -25,24 +26,23 @@ const MostFrequentChar = () => {
     }
     return [charsWithMaxOccurrences, maxOccurrences];
   }
+
   return (
-    <>
-        <div className="section-title">Find the Character that Appears Most Often in a String</div> 
-        <div className="section-body">
-          <p>{`Find the character that appears most often in a string.`}</p>
-          <div>
+    <PageContainer 
+        title='Find the Character that Appears Most Often in a String' 
+        description='Find the character that appears most often in a string.' >
+        <div>
             <label>Enter a string: </label>
             <input type="text" value={sentenceForMostOftenCharCheck} onChange={e=>handleSentenceForMostOftenCharChange(e)}/>
-          </div>
-          <span>
+        </div>
+        <span>
             <label>{`The character${getMostOftenChar()[0].length > 1 ? 's' : ''} that appear${getMostOftenChar()[0].length > 1 ? '' : 's'} most often ${getMostOftenChar()[0].length > 1 ? 'are' : 'is'}: `}</label>
             <span className="algorithm-result">{getMostOftenChar()[0].join(',')}</span>
             <span>{`, with occurrences: `}</span>
             <span className="algorithm-result">{`${getMostOftenChar()[1]}`}</span>
             <span>{`.`}</span>
-          </span>
-        </div>
-    </>)      
+        </span>
+    </PageContainer>)      
 }
 
 export default MostFrequentChar;

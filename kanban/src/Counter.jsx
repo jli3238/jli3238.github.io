@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PageContainer from '../src/PageContainer';
 
 const Counter = () => {
 
@@ -9,18 +10,18 @@ const Counter = () => {
     function handleCounterResetButtonClick() {
       setCounter(0);
     }
-  return (
-    <>
-        <div className="section-title">Counter by Click</div> 
-        <div className="section-body">
-            <p>{`Add one by click the button.`}</p>
+
+    return (
+        <PageContainer 
+            title='Counter by Click' 
+            Description='Add one by click the button.'
+            resultDescription='The current value is: '
+            result={counter}>
             <div>
                 <button onClick={handleCounterButtonClick}>Click to add 1</button>
                 <button onClick={handleCounterResetButtonClick}>Reset the counter</button>
             </div>
-            <span><label>{`The current value is: `}</label><span className="algorithm-result">{counter}</span></span>
-        </div>
-    </>)
+        </PageContainer>)
 }
 
 export default Counter;
