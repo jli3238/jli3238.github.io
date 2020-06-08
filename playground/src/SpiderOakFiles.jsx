@@ -4,7 +4,7 @@ import PageContainer from '../src/PageContainer';
 
 function File({ updateFiles, file }) {
   const onRename = () => {
-    const newName = window.prompt('Rename this file') || '';
+    const newName = window.prompt('Rename this file');
     if (newName.trim().length === 0) return;
     file = addVersion(file.id, newName);
     updateFiles(file);
