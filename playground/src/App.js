@@ -15,7 +15,7 @@ import MostFrequentChar from '../src/MostFrequentChar';
 import Palindrome from '../src/Palindrome';
 import PrimeNumberCheck from '../src/PrimeNumberCheck';
 import RandomColor from '../src/RandomColor';
-import SpiderOak from '../src/SpiderOak';
+import SpiderOakFiles from '../src/SpiderOakFiles';
 
 import './css/App.css';
 
@@ -40,7 +40,7 @@ const App = props =>
       <SpacedLink><Link to="/Palindrome">Palindrome</Link></SpacedLink>
       <SpacedLink><Link to="/PrimeNumberCheck">PrimeNumberCheck</Link></SpacedLink>
       <SpacedLink><Link to="/RandomColor">RandomColor</Link></SpacedLink>
-      <SpacedLink><Link to="/SpiderOak">SpiderOak</Link></SpacedLink>
+      <SpacedLink><Link to="/SpiderOakFiles">SpiderOakFiles</Link></SpacedLink>
     </div>
     <Switch>
       <Route path="/BracketMatch" component={BracketMatch} />
@@ -56,7 +56,7 @@ const App = props =>
       <Route path="/Palindrome" component={Palindrome} />
       <Route path="/PrimeNumberCheck" component={PrimeNumberCheck} />
       <Route path="/RandomColor" component={RandomColor} />
-      <Route path="/SpiderOak" component={SpiderOak} />
+      <Route path="/SpiderOakFiles" component={SpiderOakFiles} />
       <Route path="/" component={Kanban} />
     </Switch>
   </>
