@@ -43,15 +43,15 @@ code {
 }
 
 .card button {
-  border-radius: 10px;
+  border-radius: 5px;
   font-weight: bolder;
-  color: orange;
+  background-color: yellow;
 }
 
 .card span button {
-  border-radius: 10px;
+  border-radius: 5px;
   font-weight: bolder;
-  color: red;
+  background-color: red;
 }
 
 div.add-card {
@@ -67,9 +67,9 @@ div.add-card input {
 }
 
 div.add-card button {
-  border-radius: 10px;
+  border-radius: 5px;
   font-weight: bolder;
-  color: green;
+  background-color: green;
 }
 
 .title {
