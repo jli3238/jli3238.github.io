@@ -69,7 +69,7 @@ const Kanban = () => {
       }
 
       return (
-        <>
+        <>{typeof {} === 'object' && <div>{'{} is object'}</div>}
             <div className="section-title">Kanban App</div>
             <div className="app-kanban">
             {columnsError && <div>Something is wrong when loading columns data.</div>}

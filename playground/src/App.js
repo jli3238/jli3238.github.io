@@ -9,6 +9,7 @@ import Counter from '../src/Counter';
 import DecimalToHexadecimal from '../src/DecimalToHexadecimal';
 import ES6Promise from '../src/ES6Promise';
 import HammingDistance from '../src/HammingDistance';
+import InfiniteScrolling from '../src/InfiniteScrolling';
 import Kanban from '../src/Kanban';
 import MinimumNumberOfGates from '../src/MinimumNumberOfGates';
 import MostFrequentChar from '../src/MostFrequentChar';
@@ -34,6 +35,7 @@ const App = props =>
       <SpacedLink><Link to="/DecimalToHexadecimal">DecimalToHexadecimal</Link></SpacedLink>
       <SpacedLink><Link to="/ES6Promise">ES6Promise</Link></SpacedLink>
       <SpacedLink><Link to="/HammingDistance">HammingDistance</Link></SpacedLink>
+      <SpacedLink><Link to="/InfiniteScrolling">InfiniteScrolling</Link></SpacedLink>
       <SpacedLink><Link to="/">Kanban</Link></SpacedLink>
       <SpacedLink><Link to="/MinimumNumberOfGates">MinimumNumberOfGates</Link></SpacedLink>
       <SpacedLink><Link to="/MostFrequentChar">MostFrequentChar</Link></SpacedLink>
@@ -51,6 +53,7 @@ const App = props =>
       <Route path="/DecimalToHexadecimal" component={DecimalToHexadecimal} />
       <Route path="/ES6Promise" component={ES6Promise} />
       <Route path="/HammingDistance" component={HammingDistance} />
+      <Route path="/InfiniteScrolling" component={InfiniteScrolling} />
       <Route path="/MinimumNumberOfGates" component={MinimumNumberOfGates} />
       <Route path="/MostFrequentChar" component={MostFrequentChar} />
       <Route path="/Palindrome" component={Palindrome} />
