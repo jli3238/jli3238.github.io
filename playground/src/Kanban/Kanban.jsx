@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Column from '../src/Column';
+import Column from './Column';
 
 const Kanban = () => {
-    const [columns, setColumns] = useState([
-        
-      ]);
+    const [columns, setColumns] = useState([]);
       const [columnsError, setColumnsError] = useState('');
       const [newCardNames, setNewCardNames] = useState(['','','']);
       const DIRECTION_MOVE_LEFT = -1;

@@ -10,13 +10,14 @@ import DecimalToHexadecimal from '../src/DecimalToHexadecimal';
 import ES6Promise from '../src/ES6Promise';
 import HammingDistance from '../src/HammingDistance';
 import InfiniteScrolling from '../src/InfiniteScrolling';
-import Kanban from '../src/Kanban';
+import Kanban from './Kanban/Kanban';
+import KanbanDND from './KanbanDND/KanbanDND';
 import MinimumNumberOfGates from '../src/MinimumNumberOfGates';
 import MostFrequentChar from '../src/MostFrequentChar';
 import Palindrome from '../src/Palindrome';
 import PrimeNumberCheck from '../src/PrimeNumberCheck';
 import RandomColor from '../src/RandomColor';
-import SpiderOakFiles from '../src/SpiderOakFiles';
+import SpiderOakFiles from '../src/SpiderOak/SpiderOakFiles';
 
 import './css/App.css';
 
@@ -36,7 +37,8 @@ const App = props =>
       <SpacedLink><Link to="/ES6Promise">ES6Promise</Link></SpacedLink>
       <SpacedLink><Link to="/HammingDistance">HammingDistance</Link></SpacedLink>
       <SpacedLink><Link to="/InfiniteScrolling">InfiniteScrolling</Link></SpacedLink>
-      <SpacedLink><Link to="/">Kanban</Link></SpacedLink>
+      <SpacedLink><Link to="/Kanban">Kanban</Link></SpacedLink>
+      <SpacedLink><Link to="/">Kanban DND</Link></SpacedLink>
       <SpacedLink><Link to="/MinimumNumberOfGates">MinimumNumberOfGates</Link></SpacedLink>
       <SpacedLink><Link to="/MostFrequentChar">MostFrequentChar</Link></SpacedLink>
       <SpacedLink><Link to="/Palindrome">Palindrome</Link></SpacedLink>
@@ -54,13 +56,14 @@ const App = props =>
       <Route path="/ES6Promise" component={ES6Promise} />
       <Route path="/HammingDistance" component={HammingDistance} />
       <Route path="/InfiniteScrolling" component={InfiniteScrolling} />
+      <Route path="/Kanban" component={Kanban} />
       <Route path="/MinimumNumberOfGates" component={MinimumNumberOfGates} />
       <Route path="/MostFrequentChar" component={MostFrequentChar} />
       <Route path="/Palindrome" component={Palindrome} />
       <Route path="/PrimeNumberCheck" component={PrimeNumberCheck} />
       <Route path="/RandomColor" component={RandomColor} />
       <Route path="/SpiderOakFiles" component={SpiderOakFiles} />
-      <Route path="/" component={Kanban} />
+      <Route path="/" component={KanbanDND} />
     </Switch>
   </>
       

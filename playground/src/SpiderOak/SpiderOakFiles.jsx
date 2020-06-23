@@ -1,6 +1,6 @@
 import React from 'react';
 import { addFile, addVersion, getFiles } from './SpiderOakFilesApi';
-import PageContainer from '../src/PageContainer';
+import PageContainer from '../../src/PageContainer';
 
 function File({ updateFiles, file }) {
   const onRename = () => {

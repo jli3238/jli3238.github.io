@@ -1,6 +1,6 @@
 import React from 'react';
-import Card from '../src/Card';
-import '../src/css/App.css';
+import Card from './Card';
+import '../../src/css/App.css';
 
  const Column = props =>
  
