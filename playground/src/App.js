@@ -3,6 +3,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import BracketMatch from '../src/BracketMatch';
 import CanWinNim from '../src/CanWinNim';
+import CatPictures from './CatPictures/CatPictures';
 import ClockTicker from '../src/ClockTicker';
 import ComponentComposition from './ComponentComposition';
 import Counter from '../src/Counter';
@@ -30,6 +31,7 @@ const App = props =>
     <div className='links'>
       <SpacedLink><Link to="/BracketMatch">BracketMatch</Link></SpacedLink>
       <SpacedLink><Link to="/CanWinNim">CanWinNim</Link></SpacedLink>
+      <SpacedLink><Link to="/CatPictures">Cat Pictures</Link></SpacedLink>
       <SpacedLink><Link to="/ClockTicker">ClockTicker</Link></SpacedLink>
       <SpacedLink><Link to="/ComponentComposition">ComponentComposition</Link></SpacedLink>
       <SpacedLink><Link to="/Counter">Counter</Link></SpacedLink>
@@ -49,6 +51,7 @@ const App = props =>
     <Switch>
       <Route path="/BracketMatch" component={BracketMatch} />
       <Route path="/CanWinNim" component={CanWinNim} />
+      <Route path="/CatPictures" component={CatPictures} />
       <Route path="/ClockTicker" component={ClockTicker} />
       <Route path="/ComponentComposition" component={ComponentComposition} />
       <Route path="/Counter" component={Counter} />
