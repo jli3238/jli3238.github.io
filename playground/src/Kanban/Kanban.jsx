@@ -70,18 +70,18 @@ const Kanban = () => {
         <>{typeof {} === 'object' && <div>{'{} is object'}</div>}
             <div className="section-title">Kanban App</div>
             <div className="app-kanban">
-            {columnsError && <div>Something is wrong when loading columns data.</div>}
-            {columns.length > 0 && columns.map((column, columnIndex) =>
-                <Column 
-                key={column.name}
-                column={column}
-                columnIndex={columnIndex}
-                newCardNames={newCardNames}
-                onNewCardNamesChange={(e) => handleNewCardNamesChange(columnIndex, e)}
-                onAddCard={() => handleAddCard(columnIndex)}
-                onDelete={cardIndex => handleDelete(columnIndex, cardIndex)}
-                onMoveLeft={cardIndex => handleMove(columnIndex, cardIndex, DIRECTION_MOVE_LEFT)}
-                onMoveRight={cardIndex => handleMove(columnIndex, cardIndex, DIRECTION_MOVE_RIGHT)}/>)}
+              {columnsError && <div>Something is wrong when loading columns data.</div>}
+              {columns.length > 0 && columns.map((column, columnIndex) =>
+                  <Column 
+                    key={column.name}
+                    column={column}
+                    columnIndex={columnIndex}
+                    newCardNames={newCardNames}
+                    onNewCardNamesChange={(e) => handleNewCardNamesChange(columnIndex, e)}
+                    onAddCard={() => handleAddCard(columnIndex)}
+                    onDelete={cardIndex => handleDelete(columnIndex, cardIndex)}
+                    onMoveLeft={cardIndex => handleMove(columnIndex, cardIndex, DIRECTION_MOVE_LEFT)}
+                    onMoveRight={cardIndex => handleMove(columnIndex, cardIndex, DIRECTION_MOVE_RIGHT)}/>)}
             </div>
         </>)
 }

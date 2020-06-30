@@ -15,6 +15,7 @@ import Kanban from './Kanban/Kanban';
 import KanbanDND from './KanbanDND/KanbanDND';
 import MinimumNumberOfGates from '../src/MinimumNumberOfGates';
 import MostFrequentChar from '../src/MostFrequentChar';
+import NumberOfIslands from '../src/NumberOfIslands';
 import Palindrome from '../src/Palindrome';
 import PrimeNumberCheck from '../src/PrimeNumberCheck';
 import RandomColor from '../src/RandomColor';
@@ -43,6 +44,7 @@ const App = props =>
       <SpacedLink><Link to="/">Kanban DND</Link></SpacedLink>
       <SpacedLink><Link to="/MinimumNumberOfGates">MinimumNumberOfGates</Link></SpacedLink>
       <SpacedLink><Link to="/MostFrequentChar">MostFrequentChar</Link></SpacedLink>
+      <SpacedLink><Link to="/NumberOfIslands">NumberOfIslands</Link></SpacedLink>
       <SpacedLink><Link to="/Palindrome">Palindrome</Link></SpacedLink>
       <SpacedLink><Link to="/PrimeNumberCheck">PrimeNumberCheck</Link></SpacedLink>
       <SpacedLink><Link to="/RandomColor">RandomColor</Link></SpacedLink>
@@ -62,6 +64,7 @@ const App = props =>
       <Route path="/Kanban" component={Kanban} />
       <Route path="/MinimumNumberOfGates" component={MinimumNumberOfGates} />
       <Route path="/MostFrequentChar" component={MostFrequentChar} />
+      <Route path="/NumberOfIslands" component={NumberOfIslands} />
       <Route path="/Palindrome" component={Palindrome} />
       <Route path="/PrimeNumberCheck" component={PrimeNumberCheck} />
       <Route path="/RandomColor" component={RandomColor} />
