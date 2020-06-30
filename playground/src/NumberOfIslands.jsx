@@ -15,9 +15,6 @@ const NumberOfIslands = () => {
       [1,0,1,0,0,0,0,1],
       [1,0,1,0,1,0,0,1]
     ];
-    const max1=Math.max(...arr[0], 2, 4, 5, 1);
-    console.log(max1);
-    // twoDimensionalArray.current.value.replace(/[[\](\],)]/, '');
     if (arr === null) return 0;
     let numOfIslands = 0;
     for(let i = 0; i < arr.length; i++) {
