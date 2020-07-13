@@ -19,7 +19,9 @@ import NumberOfIslands from '../src/NumberOfIslands';
 import Palindrome from '../src/Palindrome';
 import PrimeNumberCheck from '../src/PrimeNumberCheck';
 import RandomColor from '../src/RandomColor';
+import RotationOfArray from '../src/RotationOfArray';
 import SpiderOakFiles from '../src/SpiderOak/SpiderOakFiles';
+import TestField from '../src/TestField';
 
 import './css/App.css';
 
@@ -48,6 +50,8 @@ const App = props =>
       <SpacedLink><Link to="/Palindrome">Palindrome</Link></SpacedLink>
       <SpacedLink><Link to="/PrimeNumberCheck">PrimeNumberCheck</Link></SpacedLink>
       <SpacedLink><Link to="/RandomColor">RandomColor</Link></SpacedLink>
+      <SpacedLink><Link to="/RotationOfArray">RotationOfArray</Link></SpacedLink>
+      <SpacedLink><Link to="/TestField">TestField</Link></SpacedLink>
       <SpacedLink><Link to="/SpiderOakFiles">SpiderOakFiles</Link></SpacedLink>
     </div>
     <Switch>
@@ -68,7 +72,9 @@ const App = props =>
       <Route path="/Palindrome" component={Palindrome} />
       <Route path="/PrimeNumberCheck" component={PrimeNumberCheck} />
       <Route path="/RandomColor" component={RandomColor} />
+      <Route path="/RotationOfArray" component={RotationOfArray} />
       <Route path="/SpiderOakFiles" component={SpiderOakFiles} />
+      <Route path="/TestField" component={TestField} />
       <Route path="/" component={KanbanDND} />
     </Switch>
   </>
