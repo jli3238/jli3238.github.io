@@ -13,6 +13,7 @@ import HammingDistance from '../src/HammingDistance';
 import InfiniteScrolling from '../src/InfiniteScrolling';
 import Kanban from './Kanban/Kanban';
 import KanbanDND from './KanbanDND/KanbanDND';
+import LeastPositiveNumberNotInArray from '../src/LeastPositiveNumberNotInArray';
 import MinimumNumberOfGates from '../src/MinimumNumberOfGates';
 import MostFrequentChar from '../src/MostFrequentChar';
 import NumberOfIslands from '../src/NumberOfIslands';
@@ -44,6 +45,7 @@ const App = props =>
       <SpacedLink><Link to="/InfiniteScrolling">InfiniteScrolling</Link></SpacedLink>
       <SpacedLink><Link to="/Kanban">Kanban</Link></SpacedLink>
       <SpacedLink><Link to="/">Kanban DND</Link></SpacedLink>
+      <SpacedLink><Link to="/LeastPositiveNumberNotInArray">Least Positive Number Not In Array </Link></SpacedLink>
       <SpacedLink><Link to="/MinimumNumberOfGates">MinimumNumberOfGates</Link></SpacedLink>
       <SpacedLink><Link to="/MostFrequentChar">MostFrequentChar</Link></SpacedLink>
       <SpacedLink><Link to="/NumberOfIslands">NumberOfIslands</Link></SpacedLink>
@@ -66,6 +68,7 @@ const App = props =>
       <Route path="/HammingDistance" component={HammingDistance} />
       <Route path="/InfiniteScrolling" component={InfiniteScrolling} />
       <Route path="/Kanban" component={Kanban} />
+      <Route path="/LeastPositiveNumberNotInArray" component={LeastPositiveNumberNotInArray} />
       <Route path="/MinimumNumberOfGates" component={MinimumNumberOfGates} />
       <Route path="/MostFrequentChar" component={MostFrequentChar} />
       <Route path="/NumberOfIslands" component={NumberOfIslands} />

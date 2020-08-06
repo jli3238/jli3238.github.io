@@ -10,6 +10,7 @@ function CatPictures() {
     try{
       getPic();
     } catch(error) {console.log(error);}
+    // eslint-disable-next-line
   }, [])
 
   const getPic = () => {
